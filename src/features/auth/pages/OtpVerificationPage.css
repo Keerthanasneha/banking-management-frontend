@@ -1,0 +1,258 @@
+.otp-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  background: #f4f6f8;
+  color: #17202a;
+}
+
+.otp-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.otp-card {
+  width: min(460px, 100%);
+  padding: 44px 42px;
+  background: #ffffff;
+  border: 1px solid #e1e5e9;
+  border-radius: 16px;
+  box-shadow:
+    0 20px 50px rgba(23, 32, 42, 0.07),
+    0 4px 12px rgba(23, 32, 42, 0.04);
+  text-align: center;
+}
+
+.otp-icon {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #edf3f6;
+  color: #315d78;
+}
+
+.otp-header {
+  margin-bottom: 32px;
+}
+
+.otp-eyebrow {
+  display: block;
+  margin-bottom: 12px;
+  color: #71808a;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+}
+
+.otp-header h1 {
+  margin: 0;
+  color: #17202a;
+  font-size: 28px;
+  line-height: 1.2;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+
+.otp-header p {
+  max-width: 350px;
+  margin: 12px auto 0;
+  color: #697681;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.otp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.otp-input-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.otp-input {
+  width: 50px;
+  height: 58px;
+  padding: 0;
+  border: 1px solid #cbd3d9;
+  border-radius: 8px;
+  outline: none;
+  background: #ffffff;
+  color: #17202a;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    background 150ms ease;
+}
+
+.otp-input:hover {
+  border-color: #9da9b1;
+}
+
+.otp-input:focus {
+  border-color: #315d78;
+  background: #fbfdfe;
+  box-shadow: 0 0 0 3px rgba(49, 93, 120, 0.12);
+}
+
+.otp-submit-button {
+  width: 100%;
+  height: 48px;
+  border: 0;
+  border-radius: 8px;
+  background: #172f3f;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 150ms ease,
+    box-shadow 150ms ease,
+    transform 100ms ease;
+}
+
+.otp-submit-button:hover:not(:disabled) {
+  background: #102532;
+  box-shadow: 0 5px 14px rgba(23, 47, 63, 0.18);
+}
+
+.otp-submit-button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.otp-submit-button:focus-visible {
+  outline: 3px solid rgba(49, 93, 120, 0.25);
+  outline-offset: 2px;
+}
+
+.otp-submit-button:disabled {
+  background: #c8d0d5;
+  cursor: not-allowed;
+}
+
+.otp-resend {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 26px;
+  color: #7a858d;
+  font-size: 12px;
+}
+
+.otp-resend button {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #315d78;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.otp-resend button:hover {
+  text-decoration: underline;
+}
+
+.back-to-login {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 22px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #697681;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.back-to-login:hover {
+  color: #315d78;
+}
+
+.otp-security-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 30px;
+  padding: 13px 14px;
+  border: 1px solid #e4e8eb;
+  border-radius: 8px;
+  background: #f8fafb;
+  color: #74818a;
+  text-align: left;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.otp-security-note svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: #315d78;
+}
+
+/* Tablet / mobile */
+
+@media (max-width: 520px) {
+  .otp-page {
+    padding: 20px;
+    align-items: stretch;
+  }
+
+  .otp-card {
+    width: 100%;
+    padding: 36px 24px;
+    border-radius: 12px;
+  }
+
+  .otp-input-group {
+    gap: 7px;
+  }
+
+  .otp-input {
+    width: 44px;
+    height: 54px;
+  }
+}
+
+@media (max-width: 370px) {
+  .otp-page {
+    padding: 12px;
+  }
+
+  .otp-card {
+    padding: 30px 18px;
+  }
+
+  .otp-input-group {
+    gap: 5px;
+  }
+
+  .otp-input {
+    width: 40px;
+    height: 50px;
+    font-size: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .otp-input,
+  .otp-submit-button {
+    transition: none;
+  }
+}

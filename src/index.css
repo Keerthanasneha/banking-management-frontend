@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Brand */
+  --color-primary-600: #173f5f;
+  --color-primary-700: #12344f;
+
+  /* Backgrounds */
+  --color-background: #f5f7f9;
+  --color-surface: #ffffff;
+
+  /* Text */
+  --color-text-primary: #17202a;
+  --color-text-secondary: #66737d;
+  --color-text-muted: #8a959d;
+
+  /* Borders */
+  --color-border: #dce2e7;
+  --color-border-strong: #c7d0d7;
+
+  /* Feedback */
+  --color-success: #18794e;
+  --color-warning: #a15c00;
+  --color-error: #b42318;
+  --color-info: #315d78;
+
+  /* Typography */
+  --font-family-sans:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 22px;
+  --font-size-2xl: 30px;
+  --font-size-3xl: 48px;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.7;
+}
+
+html {
+  font-family: var(--font-family-sans);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+
+  background: var(--color-background);
+  color: var(--color-text-primary);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
