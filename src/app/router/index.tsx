@@ -1,21 +1,23 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
-import { DashboardPage } from "../../features/dashboard/pages/DashboardPage";
 import { LoginPage } from "../../features/auth/pages/LoginPage";
 import { OtpVerificationPage } from "../../features/auth/pages/OtpVerificationPage";
-import { ProtectedRoute } from "./ProtectedRoute";
 import { SignupPage } from "../../features/auth/pages/SignUp";
 import { SetPasswordPage } from "../../features/auth/pages/setPassword";
+import { DashboardPage } from "../../features/dashboard/pages/DashboardPage";
 import { DepositPage } from "../../features/dashboard/pages/transactions/DepositPage";
-import { WithdrawPage } from "../../features/dashboard/pages/transactions/WithdrawPage";
-import { TransferPage } from "../../features/dashboard/pages/transactions/TransferPage";
 import { TransactionsPage } from "../../features/dashboard/pages/transactions/TransactionsPage";
+import { TransferPage } from "../../features/dashboard/pages/transactions/TransferPage";
+import { WithdrawPage } from "../../features/dashboard/pages/transactions/WithdrawPage";
+import { ProtectedRoute } from "./ProtectedRoute";
 
 export function AppRouter() {
   return (
-    <BrowserRouter>
-      <Routes>
+    <BrowserRouter >
+      <Routes  >
         {/* Public routes */}
+
+        <Route path="/" element={<Navigate to="/login" replace />} />
 
         <Route path="/login" element={<LoginPage />} />
 
