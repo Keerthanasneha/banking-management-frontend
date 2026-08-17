@@ -1,4 +1,5 @@
-// backend operations and hides HTTP details from the UI for customer related operations."
+// Provides a centralized access point for customer-related
+// backend operations and hides HTTP details from the UI.
 
 import { apiClient } from '../../../app/api/client';
 
@@ -24,10 +25,16 @@ export interface CustomerResponse {
 }
 
 export const customerApi = {
-    getCustomers: () => {
+  getCustomers: () => {
     return apiClient.get<CustomerResponse[]>('/customers');
   },
-  
+
+  getCustomer: (customerId: number) => {
+    return apiClient.get<CustomerResponse>(
+      `/customers/${customerId}`,
+    );
+  },
+
   createCustomer: (request: CreateCustomerRequest) => {
     return apiClient.post<CustomerResponse>(
       '/customers',

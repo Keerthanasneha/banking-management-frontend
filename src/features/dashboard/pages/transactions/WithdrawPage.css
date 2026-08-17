@@ -1,0 +1,235 @@
+.withdraw-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 48px 24px;
+  background: var(--color-background);
+  box-sizing: border-box;
+}
+
+.withdraw-card {
+  width: 100%;
+  max-width: 560px;
+  padding: 36px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(23, 32, 42, 0.06);
+  box-sizing: border-box;
+}
+
+/* Back button */
+
+.withdraw-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  margin-bottom: 30px;
+  border: 0;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+}
+
+.withdraw-back:hover {
+  color: var(--color-primary-600);
+}
+
+/* Header */
+
+.withdraw-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  background: #eef3f7;
+  color: var(--color-primary-600);
+}
+
+.withdraw-eyebrow {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--color-text-muted);
+  font-size: 10px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.08em;
+}
+
+.withdraw-header h1 {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-size: 30px;
+  line-height: 1.2;
+}
+
+.withdraw-header p {
+  margin: 10px 0 28px;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* Account information */
+
+.withdraw-account {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 18px;
+  margin-bottom: 28px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: #f8fafb;
+}
+
+.withdraw-account div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.withdraw-account span {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.withdraw-account strong {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+}
+
+/* Form */
+
+.withdraw-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.withdraw-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.withdraw-field label {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.withdraw-field input {
+  width: 100%;
+  height: 46px;
+  padding: 0 13px;
+  border: 1px solid var(--color-border);
+  border-radius: 7px;
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  box-sizing: border-box;
+}
+
+.withdraw-field input:focus {
+  outline: none;
+  border-color: var(--color-primary-600);
+  box-shadow: 0 0 0 3px rgba(23, 63, 95, 0.1);
+}
+
+/* Rupee input */
+
+.amount-input {
+  display: flex;
+  align-items: center;
+  height: 46px;
+  border: 1px solid var(--color-border);
+  border-radius: 7px;
+  background: var(--color-surface);
+  overflow: hidden;
+}
+
+.amount-input:focus-within {
+  border-color: var(--color-primary-600);
+  box-shadow: 0 0 0 3px rgba(23, 63, 95, 0.1);
+}
+
+.amount-input span {
+  padding-left: 13px;
+  color: var(--color-text-secondary);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.amount-input input {
+  height: 100%;
+  border: 0;
+  box-shadow: none;
+}
+
+.amount-input input:focus {
+  outline: none;
+  border: 0;
+  box-shadow: none;
+}
+
+/* Error */
+
+.withdraw-error {
+  padding: 12px;
+  border: 1px solid #f0b8b8;
+  border-radius: 7px;
+  background: #fff5f5;
+  color: var(--color-error);
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+}
+
+/* Submit */
+
+.withdraw-submit {
+  width: 100%;
+  height: 46px;
+  margin-top: 4px;
+  border: 0;
+  border-radius: 7px;
+  background: var(--color-primary-600);
+  color: #fff;
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+}
+
+.withdraw-submit:hover {
+  opacity: 0.94;
+}
+
+.withdraw-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .withdraw-page {
+    padding: 24px 16px;
+  }
+
+  .withdraw-card {
+    padding: 24px 20px;
+  }
+
+  .withdraw-account div {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+}

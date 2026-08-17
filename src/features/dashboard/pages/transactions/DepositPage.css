@@ -1,23 +1,42 @@
-.set-password-page {
+.deposit-page {
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 32px 20px;
+  padding: 48px 24px;
   background: var(--color-background);
+  box-sizing: border-box;
 }
 
-.set-password-card {
+.deposit-card {
   width: 100%;
-  max-width: 460px;
+  max-width: 620px;
+  margin: 0 auto;
   padding: 36px;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 12px;
   box-shadow: 0 4px 18px rgba(23, 32, 42, 0.05);
+  box-sizing: border-box;
 }
 
-.set-password-icon {
+.deposit-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 32px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-primary-600);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+}
+
+.deposit-header {
+  margin-bottom: 28px;
+}
+
+.deposit-icon {
   width: 48px;
   height: 48px;
   display: flex;
@@ -29,7 +48,7 @@
   color: var(--color-primary-600);
 }
 
-.set-password-eyebrow {
+.deposit-eyebrow {
   display: block;
   margin-bottom: 8px;
   color: var(--color-text-muted);
@@ -38,39 +57,66 @@
   letter-spacing: 0.08em;
 }
 
-.set-password-card h1 {
+.deposit-header h1 {
   margin: 0;
   color: var(--color-text-primary);
-  font-size: 28px;
+  font-size: 30px;
 }
 
-.set-password-card > p {
-  margin: 10px 0 28px;
+.deposit-header p {
+  margin: 10px 0 0;
   color: var(--color-text-secondary);
   line-height: 1.5;
 }
 
-.set-password-card form {
+.deposit-account {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+  padding: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: #f8fafb;
+}
+
+.deposit-account div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.deposit-account span {
+  color: var(--color-text-muted);
+  font-size: 12px;
+}
+
+.deposit-account strong {
+  color: var(--color-text-primary);
+  font-size: 14px;
+}
+
+.deposit-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.set-password-card .form-field {
+.deposit-field {
   display: flex;
   flex-direction: column;
   gap: 7px;
 }
 
-.set-password-card label {
+.deposit-field label {
   color: var(--color-text-primary);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
 }
 
-.set-password-card input {
+.deposit-field input {
   width: 100%;
-  height: 44px;
+  height: 46px;
   padding: 0 12px;
   border: 1px solid var(--color-border);
   border-radius: 7px;
@@ -81,13 +127,30 @@
   box-sizing: border-box;
 }
 
-.set-password-card input:focus {
+.deposit-field input:focus {
   outline: none;
   border-color: var(--color-primary-600);
   box-shadow: 0 0 0 3px rgba(23, 63, 95, 0.1);
 }
 
-.set-password-card button {
+.amount-input {
+  position: relative;
+}
+
+.amount-input span {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+.amount-input input {
+  padding-left: 32px;
+}
+
+.deposit-submit {
   height: 46px;
   margin-top: 4px;
   border: 0;
@@ -100,16 +163,34 @@
   cursor: pointer;
 }
 
-.set-password-card button:disabled {
+.deposit-submit:hover {
+  opacity: 0.92;
+}
+
+.deposit-submit:disabled {
   opacity: 0.65;
   cursor: not-allowed;
 }
 
-.set-password-error {
+.deposit-error {
   padding: 12px;
   border: 1px solid #f0b8b8;
   border-radius: 7px;
   background: #fff5f5;
   color: var(--color-error);
   font-size: var(--font-size-sm);
+}
+
+@media (max-width: 600px) {
+  .deposit-page {
+    padding: 24px 16px;
+  }
+
+  .deposit-card {
+    padding: 24px;
+  }
+
+  .deposit-account {
+    flex-direction: column;
+  }
 }

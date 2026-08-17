@@ -8,7 +8,7 @@ import {
   type SignupFormData,
 } from '../../auth/validations/signupSchema';
 
-import './Signup.css';
+import './SignUp.css'
 import { useCreateCustomer } from '../../customers/hooks/useCreateCustomer';
 
 export function SignupPage() {
