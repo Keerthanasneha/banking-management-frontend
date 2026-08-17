@@ -1,4 +1,4 @@
-import { apiClient } from '../../../app/api/client';
+import { apiClient } from "../../../app/api/client";
 
 export interface Account {
   id: number;
@@ -13,8 +13,6 @@ export interface Account {
 
 export const accountApi = {
   getAccounts: () => {
-    return apiClient.get<Account[]>(
-      '/accounts',
-    );
+    return apiClient.get<Account[]>("/accounts");
   },
 };

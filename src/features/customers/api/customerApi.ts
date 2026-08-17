@@ -1,7 +1,7 @@
 // Provides a centralized access point for customer-related
 // backend operations and hides HTTP details from the UI.
 
-import { apiClient } from '../../../app/api/client';
+import { apiClient } from "../../../app/api/client";
 
 export interface CreateCustomerRequest {
   firstName: string;
@@ -26,19 +26,14 @@ export interface CustomerResponse {
 
 export const customerApi = {
   getCustomers: () => {
-    return apiClient.get<CustomerResponse[]>('/customers');
+    return apiClient.get<CustomerResponse[]>("/customers");
   },
 
   getCustomer: (customerId: number) => {
-    return apiClient.get<CustomerResponse>(
-      `/customers/${customerId}`,
-    );
+    return apiClient.get<CustomerResponse>(`/customers/${customerId}`);
   },
 
   createCustomer: (request: CreateCustomerRequest) => {
-    return apiClient.post<CustomerResponse>(
-      '/customers',
-      request,
-    );
+    return apiClient.post<CustomerResponse>("/customers", request);
   },
 };

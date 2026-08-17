@@ -1,18 +1,18 @@
-import { useState, type FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, IndianRupee } from 'lucide-react';
+import { useState, type FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft, IndianRupee } from "lucide-react";
 
-import { useDepositMutation } from '../../hooks/useDepositMutation';
-import { useAccountsQuery } from '../../hooks/useAccountsQuery';
-import { useCustomersQuery } from '../../../customers/hooks/useCustomersQuery';
+import { useDepositMutation } from "../../hooks/useDepositMutation";
+import { useAccountsQuery } from "../../hooks/useAccountsQuery";
+import { useCustomersQuery } from "../../../customers/hooks/useCustomersQuery";
 
-import { getLoggedInEmail } from '../../../../shared/utils/currentUser';
+import { getLoggedInEmail } from "../../../../shared/utils/currentUser";
 import {
   getSelectedAccountNumber,
   saveSelectedAccountNumber,
-} from '../../../../shared/utils/accountStorage';
+} from "../../../../shared/utils/accountStorage";
 
-import './DepositPage.css';
+import "./DepositPage.css";
 
 export function DepositPage() {
   const navigate = useNavigate();
@@ -29,8 +29,8 @@ export function DepositPage() {
   // FORM STATE
   // -----------------------------------------
 
-  const [amount, setAmount] = useState('');
-  const [remarks, setRemarks] = useState('');
+  const [amount, setAmount] = useState("");
+  const [remarks, setRemarks] = useState("");
 
   // -----------------------------------------
   // LOGGED-IN USER
@@ -43,9 +43,7 @@ export function DepositPage() {
   // -----------------------------------------
 
   const customer = customersQuery.data?.find(
-    (item) =>
-      item.email.toLowerCase() ===
-      loggedInEmail?.toLowerCase(),
+    (item) => item.email.toLowerCase() === loggedInEmail?.toLowerCase(),
   );
 
   // -----------------------------------------
@@ -53,9 +51,7 @@ export function DepositPage() {
   // -----------------------------------------
 
   const savedAccountNumber = customer
-    ? getSelectedAccountNumber(
-        customer.customerId,
-      )
+    ? getSelectedAccountNumber(customer.customerId)
     : null;
 
   // -----------------------------------------
@@ -64,9 +60,7 @@ export function DepositPage() {
 
   const customerAccounts =
     accountsQuery.data?.filter(
-      (item) =>
-        item.customerId ===
-        customer?.customerId,
+      (item) => item.customerId === customer?.customerId,
     ) ?? [];
 
   // -----------------------------------------
@@ -85,39 +79,29 @@ export function DepositPage() {
 
   const selectedAccount =
     customerAccounts.find(
-      (account) =>
-        account.accountNumber ===
-        savedAccountNumber,
-    ) ??
-    customerAccounts[0];
+      (account) => account.accountNumber === savedAccountNumber,
+    ) ?? customerAccounts[0];
 
   // -----------------------------------------
   // SUBMIT
   // -----------------------------------------
 
-  const handleSubmit = (
-    event: FormEvent<HTMLFormElement>,
-  ) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!selectedAccount) {
       return;
     }
 
-    const numericAmount =
-      Number(amount);
+    const numericAmount = Number(amount);
 
-    if (
-      !Number.isFinite(numericAmount) ||
-      numericAmount <= 0
-    ) {
+    if (!Number.isFinite(numericAmount) || numericAmount <= 0) {
       return;
     }
 
     depositMutation.mutate(
       {
-        accountNumber:
-          selectedAccount.accountNumber,
+        accountNumber: selectedAccount.accountNumber,
 
         amount: numericAmount,
 
@@ -138,7 +122,7 @@ export function DepositPage() {
             );
           }
 
-          navigate('/dashboard');
+          navigate("/dashboard");
         },
       },
     );
@@ -148,16 +132,11 @@ export function DepositPage() {
   // LOADING
   // -----------------------------------------
 
-  if (
-    accountsQuery.isLoading ||
-    customersQuery.isLoading
-  ) {
+  if (accountsQuery.isLoading || customersQuery.isLoading) {
     return (
       <main className="deposit-page">
         <div className="deposit-card">
-          <p>
-            Loading your account...
-          </p>
+          <p>Loading your account...</p>
         </div>
       </main>
     );
@@ -167,32 +146,17 @@ export function DepositPage() {
   // ERROR
   // -----------------------------------------
 
-  if (
-    accountsQuery.isError ||
-    customersQuery.isError
-  ) {
+  if (accountsQuery.isError || customersQuery.isError) {
     return (
       <main className="deposit-page">
         <div className="deposit-card">
+          <h1>Deposit</h1>
 
-          <h1>
-            Deposit
-          </h1>
+          <p>Unable to load your account details.</p>
 
-          <p>
-            Unable to load your account
-            details.
-          </p>
-
-          <button
-            type="button"
-            onClick={() =>
-              navigate('/dashboard')
-            }
-          >
+          <button type="button" onClick={() => navigate("/dashboard")}>
             Back to dashboard
           </button>
-
         </div>
       </main>
     );
@@ -206,25 +170,13 @@ export function DepositPage() {
     return (
       <main className="deposit-page">
         <div className="deposit-card">
+          <h1>Deposit</h1>
 
-          <h1>
-            Deposit
-          </h1>
+          <p>Unable to identify the logged-in customer.</p>
 
-          <p>
-            Unable to identify the logged-in
-            customer.
-          </p>
-
-          <button
-            type="button"
-            onClick={() =>
-              navigate('/dashboard')
-            }
-          >
+          <button type="button" onClick={() => navigate("/dashboard")}>
             Back to dashboard
           </button>
-
         </div>
       </main>
     );
@@ -238,25 +190,13 @@ export function DepositPage() {
     return (
       <main className="deposit-page">
         <div className="deposit-card">
+          <h1>Deposit</h1>
 
-          <h1>
-            Deposit
-          </h1>
+          <p>No bank account is available for this customer.</p>
 
-          <p>
-            No bank account is available
-            for this customer.
-          </p>
-
-          <button
-            type="button"
-            onClick={() =>
-              navigate('/dashboard')
-            }
-          >
+          <button type="button" onClick={() => navigate("/dashboard")}>
             Back to dashboard
           </button>
-
         </div>
       </main>
     );
@@ -268,103 +208,58 @@ export function DepositPage() {
 
   return (
     <main className="deposit-page">
-
       <section className="deposit-card">
-
         {/* BACK */}
 
         <button
           type="button"
           className="deposit-back"
-          onClick={() =>
-            navigate('/dashboard')
-          }
+          onClick={() => navigate("/dashboard")}
         >
           <ArrowLeft size={18} />
-
           Back to dashboard
         </button>
-
 
         {/* HEADER */}
 
         <div className="deposit-header">
-
           <div className="deposit-icon">
             <IndianRupee size={24} />
           </div>
 
-          <span className="deposit-eyebrow">
-            ACCOUNT TRANSACTION
-          </span>
+          <span className="deposit-eyebrow">ACCOUNT TRANSACTION</span>
 
-          <h1>
-            Deposit money
-          </h1>
+          <h1>Deposit money</h1>
 
-          <p>
-            Add money to your bank account
-            securely.
-          </p>
-
+          <p>Add money to your bank account securely.</p>
         </div>
-
 
         {/* SELECTED ACCOUNT */}
 
         <div className="deposit-account">
-
           <div>
+            <span>Account</span>
 
-            <span>
-              Account
-            </span>
-
-            <strong>
-              {selectedAccount.accountType}
-            </strong>
-
+            <strong>{selectedAccount.accountType}</strong>
           </div>
 
-
           <div>
+            <span>Account number</span>
 
-            <span>
-              Account number
-            </span>
-
-            <strong>
-              ••••{' '}
-              {selectedAccount.accountNumber.slice(
-                -4,
-              )}
-            </strong>
-
+            <strong>•••• {selectedAccount.accountNumber.slice(-4)}</strong>
           </div>
-
         </div>
-
 
         {/* FORM */}
 
-        <form
-          className="deposit-form"
-          onSubmit={handleSubmit}
-        >
-
+        <form className="deposit-form" onSubmit={handleSubmit}>
           {/* AMOUNT */}
 
           <div className="deposit-field">
-
-            <label htmlFor="amount">
-              Amount
-            </label>
+            <label htmlFor="amount">Amount</label>
 
             <div className="amount-input">
-
-              <span>
-                ₹
-              </span>
+              <span>₹</span>
 
               <input
                 id="amount"
@@ -373,74 +268,46 @@ export function DepositPage() {
                 step="0.01"
                 placeholder="Enter amount"
                 value={amount}
-                onChange={(event) =>
-                  setAmount(
-                    event.target.value,
-                  )
-                }
+                onChange={(event) => setAmount(event.target.value)}
                 required
               />
-
             </div>
-
           </div>
-
 
           {/* REMARKS */}
 
           <div className="deposit-field">
-
-            <label htmlFor="remarks">
-              Remarks
-            </label>
+            <label htmlFor="remarks">Remarks</label>
 
             <input
               id="remarks"
               type="text"
               placeholder="e.g. Salary credit"
               value={remarks}
-              onChange={(event) =>
-                setRemarks(
-                  event.target.value,
-                )
-              }
+              onChange={(event) => setRemarks(event.target.value)}
               required
             />
-
           </div>
-
 
           {/* ERROR */}
 
           {depositMutation.isError && (
-            <div
-              className="deposit-error"
-              role="alert"
-            >
-              Unable to process the
-              deposit. Please try again.
+            <div className="deposit-error" role="alert">
+              Unable to process the deposit. Please try again.
             </div>
           )}
-
 
           {/* SUBMIT */}
 
           <button
             type="submit"
             className="deposit-submit"
-            disabled={
-              depositMutation.isPending
-            }
+            disabled={depositMutation.isPending}
           >
-            {depositMutation.isPending
-              ? 'Processing...'
-              : 'Deposit money'}
+            {depositMutation.isPending ? "Processing..." : "Deposit money"}
           </button>
-
         </form>
-
       </section>
-
     </main>
   );
 }

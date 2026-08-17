@@ -6,18 +6,18 @@ import {
   Tooltip,
   XAxis,
   YAxis,
-} from 'recharts';
+} from "recharts";
 
-import './TransactionActivityChart.css';
+import "./TransactionActivityChart.css";
 
 const transactionData = [
-  { day: 'Mon', transactions: 8200 },
-  { day: 'Tue', transactions: 10500 },
-  { day: 'Wed', transactions: 9200 },
-  { day: 'Thu', transactions: 11800 },
-  { day: 'Fri', transactions: 15100 },
-  { day: 'Sat', transactions: 11600 },
-  { day: 'Sun', transactions: 13700 },
+  { day: "Mon", transactions: 8200 },
+  { day: "Tue", transactions: 10500 },
+  { day: "Wed", transactions: 9200 },
+  { day: "Thu", transactions: 11800 },
+  { day: "Fri", transactions: 15100 },
+  { day: "Sat", transactions: 11600 },
+  { day: "Sun", transactions: 13700 },
 ];
 
 export function TransactionActivityChart() {
@@ -31,9 +31,7 @@ export function TransactionActivityChart() {
 
           <h2>Transaction Activity</h2>
 
-          <p>
-            Transaction volume over the last 7 days.
-          </p>
+          <p>Transaction volume over the last 7 days.</p>
         </div>
 
         <select
@@ -48,10 +46,7 @@ export function TransactionActivityChart() {
       </div>
 
       <div className="transaction-chart__body">
-        <ResponsiveContainer
-          width="100%"
-          height="100%"
-        >
+        <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={transactionData}
             margin={{
@@ -61,10 +56,7 @@ export function TransactionActivityChart() {
               bottom: 0,
             }}
           >
-            <CartesianGrid
-              strokeDasharray="3 3"
-              vertical={false}
-            />
+            <CartesianGrid strokeDasharray="3 3" vertical={false} />
 
             <XAxis
               dataKey="day"
@@ -77,15 +69,13 @@ export function TransactionActivityChart() {
               axisLine={false}
               tickLine={false}
               width={45}
-              tickFormatter={(value) =>
-                `${value / 1000}K`
-              }
+              tickFormatter={(value) => `${value / 1000}K`}
             />
 
             <Tooltip
               formatter={(value) => [
                 Number(value).toLocaleString(),
-                'Transactions',
+                "Transactions",
               ]}
             />
 

@@ -1,9 +1,6 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation } from "@tanstack/react-query";
 
-import {
-  customerApi,
-  type CreateCustomerRequest,
-} from '../api/customerApi';
+import { customerApi, type CreateCustomerRequest } from "../api/customerApi";
 
 export function useCreateCustomer() {
   return useMutation({

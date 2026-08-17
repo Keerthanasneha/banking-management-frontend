@@ -1,12 +1,12 @@
-import { Bell, ChevronDown } from 'lucide-react';
+import { Bell, ChevronDown } from "lucide-react";
 
-import './Header.css';
+import "./Header.css";
 
 interface HeaderProps {
   title?: string;
 }
 
-export function Header({ title = 'Dashboard' }: HeaderProps) {
+export function Header({ title = "Dashboard" }: HeaderProps) {
   return (
     <header className="app-header">
       <div className="app-header__left">
@@ -21,9 +21,7 @@ export function Header({ title = 'Dashboard' }: HeaderProps) {
         >
           <Bell size={19} strokeWidth={1.8} />
 
-          <span className="app-header__notification-badge">
-            3
-          </span>
+          <span className="app-header__notification-badge">3</span>
         </button>
 
         <button
@@ -31,18 +29,12 @@ export function Header({ title = 'Dashboard' }: HeaderProps) {
           className="app-header__profile"
           aria-label="Open profile menu"
         >
-          <span className="app-header__avatar">
-            S
-          </span>
+          <span className="app-header__avatar">S</span>
 
           <span className="app-header__user">
-            <span className="app-header__user-name">
-              Sneha Satish
-            </span>
+            <span className="app-header__user-name">Sneha Satish</span>
 
-            <span className="app-header__user-role">
-              Administrator
-            </span>
+            <span className="app-header__user-role">Administrator</span>
           </span>
 
           <ChevronDown

@@ -1,6 +1,6 @@
-import { apiClient } from '../../../app/api/client';
+import { apiClient } from "../../../app/api/client";
 
-import type { Transaction } from '../types/transaction';
+import type { Transaction } from "../types/transaction";
 
 export interface DepositRequest {
   accountNumber: string;
@@ -22,31 +22,19 @@ export interface TransferRequest {
 }
 
 export const transactionApi = {
-
   getTransactions: (accountNumber: string) => {
-    return apiClient.get<Transaction[]>(
-      `/transactions/${accountNumber}`,
-    );
+    return apiClient.get<Transaction[]>(`/transactions/${accountNumber}`);
   },
 
   deposit: (request: DepositRequest) => {
-    return apiClient.post(
-      '/transactions/deposit',
-      request,
-    );
+    return apiClient.post("/transactions/deposit", request);
   },
 
   withdraw: (request: WithdrawRequest) => {
-    return apiClient.post(
-      '/transactions/withdraw',
-      request,
-    );
+    return apiClient.post("/transactions/withdraw", request);
   },
 
   transfer: (request: TransferRequest) => {
-    return apiClient.post(
-      '/transactions/transfer',
-      request,
-    );
+    return apiClient.post("/transactions/transfer", request);
   },
 };

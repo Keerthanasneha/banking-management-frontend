@@ -1,14 +1,13 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
-import { accountApi } from '../api/accountApi';
+import { accountApi } from "../api/accountApi";
 
 export function useAccountsQuery() {
   return useQuery({
-    queryKey: ['accounts'],
+    queryKey: ["accounts"],
 
     queryFn: async () => {
-      const response =
-        await accountApi.getAccounts();
+      const response = await accountApi.getAccounts();
 
       return response.data;
     },

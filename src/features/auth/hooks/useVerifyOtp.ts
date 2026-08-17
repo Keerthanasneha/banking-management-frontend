@@ -1,12 +1,9 @@
-import { useMutation } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
-import {
-  authApi,
-  type VerifyOtpRequest,
-} from '../api/authApi';
+import { authApi, type VerifyOtpRequest } from "../api/authApi";
 
-import { tokenStorage } from '../storage/tokenStorage';
+import { tokenStorage } from "../storage/tokenStorage";
 
 export function useVerifyOtp() {
   const navigate = useNavigate();
@@ -21,7 +18,7 @@ export function useVerifyOtp() {
     onSuccess: (data) => {
       tokenStorage.setToken(data.token);
 
-      navigate('/dashboard', {
+      navigate("/dashboard", {
         replace: true,
       });
     },

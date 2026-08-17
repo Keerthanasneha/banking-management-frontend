@@ -279,8 +279,7 @@
 .input-wrapper:focus-within {
   border-color: var(--color-info);
 
-  box-shadow:
-    0 0 0 3px rgba(49, 93, 120, 0.12);
+  box-shadow: 0 0 0 3px rgba(49, 93, 120, 0.12);
 }
 
 .input-wrapper > svg {
@@ -390,8 +389,7 @@
 .login-button:hover:not(:disabled) {
   background: var(--color-primary-700);
 
-  box-shadow:
-    0 5px 14px rgba(23, 47, 63, 0.18);
+  box-shadow: 0 5px 14px rgba(23, 47, 63, 0.18);
 }
 
 .login-button:active:not(:disabled) {

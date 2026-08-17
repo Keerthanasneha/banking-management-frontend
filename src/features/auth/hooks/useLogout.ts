@@ -1,6 +1,6 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import { tokenStorage } from '../storage/tokenStorage';
+import { tokenStorage } from "../storage/tokenStorage";
 
 export function useLogout() {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ export function useLogout() {
     tokenStorage.clearToken();
 
     // Go back to login
-    navigate('/login', {
+    navigate("/login", {
       replace: true,
     });
   };

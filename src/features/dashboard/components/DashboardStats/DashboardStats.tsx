@@ -1,20 +1,12 @@
-import {
-  AlertTriangle,
-  ArrowLeftRight,
-  Users,
-  Wallet,
-} from 'lucide-react';
+import { AlertTriangle, ArrowLeftRight, Users, Wallet } from "lucide-react";
 
-import { DashboardStatCard } from '../DashboardStatCard/DashboardStatCard';
+import { DashboardStatCard } from "../DashboardStatCard/DashboardStatCard";
 
-import './DashboardStats.css';
+import "./DashboardStats.css";
 
 export function DashboardStats() {
   return (
-    <section
-      className="dashboard-stats"
-      aria-label="Banking statistics"
-    >
+    <section className="dashboard-stats" aria-label="Banking statistics">
       <DashboardStatCard
         title="Total Customers"
         value="12,482"

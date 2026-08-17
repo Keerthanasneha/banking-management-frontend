@@ -1,4 +1,4 @@
-import { getJwtPayload } from './jwt';
+import { getJwtPayload } from "./jwt";
 
 export function getLoggedInEmail(): string | null {
   const payload = getJwtPayload();

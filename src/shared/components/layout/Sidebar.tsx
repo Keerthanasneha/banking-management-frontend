@@ -8,50 +8,50 @@ import {
   UserRound,
   Users,
   Wallet,
-} from 'lucide-react';
+} from "lucide-react";
 
-import './Sidebar.css';
+import "./Sidebar.css";
 
 const navigationItems = [
   {
-    label: 'Dashboard',
+    label: "Dashboard",
     icon: LayoutDashboard,
-    path: '/dashboard',
+    path: "/dashboard",
   },
   {
-    label: 'Customers',
+    label: "Customers",
     icon: Users,
-    path: '/customers',
+    path: "/customers",
   },
   {
-    label: 'Accounts',
+    label: "Accounts",
     icon: Wallet,
-    path: '/accounts',
+    path: "/accounts",
   },
   {
-    label: 'Transactions',
+    label: "Transactions",
     icon: CreditCard,
-    path: '/transactions',
+    path: "/transactions",
   },
   {
-    label: 'Transfers',
+    label: "Transfers",
     icon: Repeat2,
-    path: '/transfers',
+    path: "/transfers",
   },
   {
-    label: 'Fraud Alerts',
+    label: "Fraud Alerts",
     icon: ShieldAlert,
-    path: '/fraud-alerts',
+    path: "/fraud-alerts",
   },
   {
-    label: 'Notifications',
+    label: "Notifications",
     icon: Bell,
-    path: '/notifications',
+    path: "/notifications",
   },
   {
-    label: 'Profile',
+    label: "Profile",
     icon: UserRound,
-    path: '/profile',
+    path: "/profile",
   },
 ];
 
@@ -61,9 +61,7 @@ export function Sidebar() {
       <div className="sidebar__brand">
         <div className="sidebar__brand-mark">B</div>
 
-        <span className="sidebar__brand-name">
-          Banking Management
-        </span>
+        <span className="sidebar__brand-name">Banking Management</span>
       </div>
 
       <nav className="sidebar__navigation" aria-label="Main navigation">
@@ -72,14 +70,9 @@ export function Sidebar() {
 
           {navigationItems.slice(0, 1).map((item) => {
             const Icon = item.icon;
-    
 
             return (
-              <a
-                key={item.path}
-                href={item.path}
-                className="sidebar__link"
-              >
+              <a key={item.path} href={item.path} className="sidebar__link">
                 <Icon size={18} />
                 <span>{item.label}</span>
               </a>
@@ -94,11 +87,7 @@ export function Sidebar() {
             const Icon = item.icon;
 
             return (
-              <a
-                key={item.path}
-                href={item.path}
-                className="sidebar__link"
-              >
+              <a key={item.path} href={item.path} className="sidebar__link">
                 <Icon size={18} />
                 <span>{item.label}</span>
               </a>
@@ -113,11 +102,7 @@ export function Sidebar() {
             const Icon = item.icon;
 
             return (
-              <a
-                key={item.path}
-                href={item.path}
-                className="sidebar__link"
-              >
+              <a key={item.path} href={item.path} className="sidebar__link">
                 <Icon size={18} />
                 <span>{item.label}</span>
               </a>

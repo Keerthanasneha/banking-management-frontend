@@ -151,12 +151,11 @@ export function LoginPage() {
                 {login.isPending ? "Signing in..." : "Sign in"}
               </button>
 
-               {/* Sign-up */}
-                <div className="login-signup">
+              {/* Sign-up */}
+              <div className="login-signup">
                 <span>Don't have an account?</span>
                 <Link to="/signup">Create an account</Link>
               </div>
-
             </form>
 
             <div className="login-footer">

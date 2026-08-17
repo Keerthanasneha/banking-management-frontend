@@ -1,7 +1,7 @@
-import { useMutation } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
-import { authApi, type LoginRequest } from '../api/authApi';
+import { authApi, type LoginRequest } from "../api/authApi";
 
 export function useLogin() {
   const navigate = useNavigate();
@@ -14,11 +14,11 @@ export function useLogin() {
     },
 
     onSuccess: (_, variables) => {
-  navigate('/otp-verification', {
-    state: {
-      email: variables.email,
+      navigate("/otp-verification", {
+        state: {
+          email: variables.email,
+        },
+      });
     },
-  });
-},
   });
 }

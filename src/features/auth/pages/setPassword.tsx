@@ -1,10 +1,10 @@
-import { useState, type FormEvent } from 'react';
-import { LockKeyhole } from 'lucide-react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useState, type FormEvent } from "react";
+import { LockKeyhole } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
 
-import { authApi } from '../api/authApi';
+import { authApi } from "../api/authApi";
 
-import './setPassword.css';
+import "./setPassword.css";
 
 interface RegistrationState {
   customerId: number;
@@ -15,13 +15,11 @@ export function SetPasswordPage() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const registration = location.state as
-    | RegistrationState
-    | null;
+  const registration = location.state as RegistrationState | null;
 
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   if (!registration?.customerId) {
@@ -30,14 +28,9 @@ export function SetPasswordPage() {
         <section className="set-password-card">
           <h1>Registration session expired</h1>
 
-          <p>
-            Please start the registration process again.
-          </p>
+          <p>Please start the registration process again.</p>
 
-          <button
-            type="button"
-            onClick={() => navigate('/signup')}
-          >
+          <button type="button" onClick={() => navigate("/signup")}>
             Back to registration
           </button>
         </section>
@@ -45,22 +38,18 @@ export function SetPasswordPage() {
     );
   }
 
-  const handleSubmit = async (
-    event: FormEvent<HTMLFormElement>,
-  ) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    setError('');
+    setError("");
 
     if (password.length < 8) {
-      setError(
-        'Password must contain at least 8 characters.',
-      );
+      setError("Password must contain at least 8 characters.");
       return;
     }
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match.');
+      setError("Passwords do not match.");
       return;
     }
 
@@ -72,7 +61,7 @@ export function SetPasswordPage() {
         password,
       });
 
-      navigate('/login', {
+      navigate("/login", {
         replace: true,
         state: {
           registrationSuccess: true,
@@ -80,11 +69,9 @@ export function SetPasswordPage() {
         },
       });
     } catch (error) {
-      console.error('Password registration failed:', error);
+      console.error("Password registration failed:", error);
 
-      setError(
-        'Unable to create your password. Please try again.',
-      );
+      setError("Unable to create your password. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -93,36 +80,28 @@ export function SetPasswordPage() {
   return (
     <main className="set-password-page">
       <section className="set-password-card">
-
         <div className="set-password-icon">
           <LockKeyhole size={24} />
         </div>
 
-        <span className="set-password-eyebrow">
-          ACCOUNT SECURITY
-        </span>
+        <span className="set-password-eyebrow">ACCOUNT SECURITY</span>
 
         <h1>Create your password</h1>
 
         <p>
-          Your customer account has been created. Set a
-          secure password to complete your registration.
+          Your customer account has been created. Set a secure password to
+          complete your registration.
         </p>
 
         <form onSubmit={handleSubmit}>
-
           <div className="form-field">
-            <label htmlFor="password">
-              Password
-            </label>
+            <label htmlFor="password">Password</label>
 
             <input
               id="password"
               type="password"
               value={password}
-              onChange={(event) =>
-                setPassword(event.target.value)
-              }
+              onChange={(event) => setPassword(event.target.value)}
               autoComplete="new-password"
               placeholder="Enter your password"
               required
@@ -130,17 +109,13 @@ export function SetPasswordPage() {
           </div>
 
           <div className="form-field">
-            <label htmlFor="confirmPassword">
-              Confirm password
-            </label>
+            <label htmlFor="confirmPassword">Confirm password</label>
 
             <input
               id="confirmPassword"
               type="password"
               value={confirmPassword}
-              onChange={(event) =>
-                setConfirmPassword(event.target.value)
-              }
+              onChange={(event) => setConfirmPassword(event.target.value)}
               autoComplete="new-password"
               placeholder="Re-enter your password"
               required
@@ -148,25 +123,15 @@ export function SetPasswordPage() {
           </div>
 
           {error && (
-            <div
-              className="set-password-error"
-              role="alert"
-            >
+            <div className="set-password-error" role="alert">
               {error}
             </div>
           )}
 
-          <button
-            type="submit"
-            disabled={isSubmitting}
-          >
-            {isSubmitting
-              ? 'Creating password...'
-              : 'Create password'}
+          <button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Creating password..." : "Create password"}
           </button>
-
         </form>
-
       </section>
     </main>
   );

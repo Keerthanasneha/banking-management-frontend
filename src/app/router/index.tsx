@@ -13,8 +13,8 @@ import { ProtectedRoute } from "./ProtectedRoute";
 
 export function AppRouter() {
   return (
-    <BrowserRouter >
-      <Routes  >
+    <BrowserRouter>
+      <Routes>
         {/* Public routes */}
 
         <Route path="/" element={<Navigate to="/login" replace />} />

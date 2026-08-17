@@ -1,11 +1,11 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from "@testing-library/react";
 
-import App from './App';
-import { AppProviders } from './app/providers/AppProviders';
+import App from "./App";
+import { AppProviders } from "./app/providers/AppProviders";
 
-describe('App', () => {
-  it('renders the login page on /login route', () => {
-    window.history.pushState({}, '', '/login');
+describe("App", () => {
+  it("renders the login page on /login route", () => {
+    window.history.pushState({}, "", "/login");
 
     render(
       <AppProviders>
@@ -14,7 +14,7 @@ describe('App', () => {
     );
 
     expect(
-      screen.getByRole('heading', {
+      screen.getByRole("heading", {
         name: /manage your banking/i,
       }),
     ).toBeInTheDocument();

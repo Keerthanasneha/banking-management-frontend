@@ -1,4 +1,4 @@
-const TOKEN_KEY = 'banking_access_token';
+const TOKEN_KEY = "banking_access_token";
 
 export const tokenStorage = {
   getToken(): string | null {

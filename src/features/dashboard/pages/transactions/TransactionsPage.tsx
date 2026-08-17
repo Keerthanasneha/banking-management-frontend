@@ -1,18 +1,14 @@
-import {
-  ArrowLeft,
-  ArrowDownLeft,
-  ArrowUpRight,
-} from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { ArrowLeft, ArrowDownLeft, ArrowUpRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-import { useAccountsQuery } from '../../hooks/useAccountsQuery';
-import { useTransactionsQuery } from '../../hooks/useTransactionsQuery';
-import { useCustomersQuery } from '../../../customers/hooks/useCustomersQuery';
+import { useAccountsQuery } from "../../hooks/useAccountsQuery";
+import { useTransactionsQuery } from "../../hooks/useTransactionsQuery";
+import { useCustomersQuery } from "../../../customers/hooks/useCustomersQuery";
 
-import { getLoggedInEmail } from '../../../../shared/utils/currentUser';
-import { getSelectedAccountNumber } from '../../../../shared/utils/accountStorage';
+import { getLoggedInEmail } from "../../../../shared/utils/currentUser";
+import { getSelectedAccountNumber } from "../../../../shared/utils/accountStorage";
 
-import './TransactionsPage.css';
+import "./TransactionsPage.css";
 
 export function TransactionsPage() {
   const navigate = useNavigate();
@@ -35,9 +31,7 @@ export function TransactionsPage() {
   // -----------------------------------------
 
   const customer = customersQuery.data?.find(
-    (item) =>
-      item.email.toLowerCase() ===
-      loggedInEmail?.toLowerCase(),
+    (item) => item.email.toLowerCase() === loggedInEmail?.toLowerCase(),
   );
 
   // -----------------------------------------
@@ -46,9 +40,7 @@ export function TransactionsPage() {
 
   const customerAccounts =
     accountsQuery.data?.filter(
-      (account) =>
-        account.customerId ===
-        customer?.customerId,
+      (account) => account.customerId === customer?.customerId,
     ) ?? [];
 
   // -----------------------------------------
@@ -56,9 +48,7 @@ export function TransactionsPage() {
   // -----------------------------------------
 
   const savedAccountNumber = customer
-    ? getSelectedAccountNumber(
-        customer.customerId,
-      )
+    ? getSelectedAccountNumber(customer.customerId)
     : null;
 
   // -----------------------------------------
@@ -77,35 +67,24 @@ export function TransactionsPage() {
 
   const account =
     customerAccounts.find(
-      (item) =>
-        item.accountNumber ===
-        savedAccountNumber,
-    ) ??
-    customerAccounts[0];
+      (item) => item.accountNumber === savedAccountNumber,
+    ) ?? customerAccounts[0];
 
   // -----------------------------------------
   // TRANSACTIONS
   // -----------------------------------------
 
-  const transactionsQuery =
-    useTransactionsQuery(
-      account?.accountNumber,
-    );
+  const transactionsQuery = useTransactionsQuery(account?.accountNumber);
 
   // -----------------------------------------
   // LOADING
   // -----------------------------------------
 
-  if (
-    accountsQuery.isLoading ||
-    customersQuery.isLoading
-  ) {
+  if (accountsQuery.isLoading || customersQuery.isLoading) {
     return (
       <main className="transactions-page">
         <section className="transactions-card">
-          <p>
-            Loading your account...
-          </p>
+          <p>Loading your account...</p>
         </section>
       </main>
     );
@@ -115,50 +94,30 @@ export function TransactionsPage() {
   // API ERROR
   // -----------------------------------------
 
-  if (
-    accountsQuery.isError ||
-    customersQuery.isError
-  ) {
+  if (accountsQuery.isError || customersQuery.isError) {
     return (
       <main className="transactions-page">
         <section className="transactions-card">
-
           <button
             type="button"
             className="transactions-back"
-            onClick={() =>
-              navigate('/dashboard')
-            }
+            onClick={() => navigate("/dashboard")}
           >
             <ArrowLeft size={18} />
             Back to dashboard
           </button>
 
           <div className="transactions-header">
+            <span className="transactions-eyebrow">ACCOUNT ACTIVITY</span>
 
-            <span className="transactions-eyebrow">
-              ACCOUNT ACTIVITY
-            </span>
+            <h1>Transactions</h1>
 
-            <h1>
-              Transactions
-            </h1>
-
-            <p>
-              View all transactions made from
-              your bank account.
-            </p>
-
+            <p>View all transactions made from your bank account.</p>
           </div>
 
-          <div
-            className="transactions-error"
-            role="alert"
-          >
-            Unable to load your account
-            details. Please try again.
+          <div className="transactions-error" role="alert">
+            Unable to load your account details. Please try again.
           </div>
-
         </section>
       </main>
     );
@@ -172,38 +131,24 @@ export function TransactionsPage() {
     return (
       <main className="transactions-page">
         <section className="transactions-card">
-
           <button
             type="button"
             className="transactions-back"
-            onClick={() =>
-              navigate('/dashboard')
-            }
+            onClick={() => navigate("/dashboard")}
           >
             <ArrowLeft size={18} />
             Back to dashboard
           </button>
 
           <div className="transactions-header">
+            <span className="transactions-eyebrow">ACCOUNT ACTIVITY</span>
 
-            <span className="transactions-eyebrow">
-              ACCOUNT ACTIVITY
-            </span>
-
-            <h1>
-              Transactions
-            </h1>
-
+            <h1>Transactions</h1>
           </div>
 
-          <div
-            className="transactions-error"
-            role="alert"
-          >
-            Unable to identify the logged-in
-            customer.
+          <div className="transactions-error" role="alert">
+            Unable to identify the logged-in customer.
           </div>
-
         </section>
       </main>
     );
@@ -217,38 +162,24 @@ export function TransactionsPage() {
     return (
       <main className="transactions-page">
         <section className="transactions-card">
-
           <button
             type="button"
             className="transactions-back"
-            onClick={() =>
-              navigate('/dashboard')
-            }
+            onClick={() => navigate("/dashboard")}
           >
             <ArrowLeft size={18} />
             Back to dashboard
           </button>
 
           <div className="transactions-header">
+            <span className="transactions-eyebrow">ACCOUNT ACTIVITY</span>
 
-            <span className="transactions-eyebrow">
-              ACCOUNT ACTIVITY
-            </span>
-
-            <h1>
-              Transactions
-            </h1>
-
+            <h1>Transactions</h1>
           </div>
 
-          <div
-            className="transactions-error"
-            role="alert"
-          >
-            No bank account is available
-            for this customer.
+          <div className="transactions-error" role="alert">
+            No bank account is available for this customer.
           </div>
-
         </section>
       </main>
     );
@@ -260,243 +191,146 @@ export function TransactionsPage() {
 
   return (
     <main className="transactions-page">
-
       <section className="transactions-card">
-
         {/* BACK */}
 
         <button
           type="button"
           className="transactions-back"
-          onClick={() =>
-            navigate('/dashboard')
-          }
+          onClick={() => navigate("/dashboard")}
         >
           <ArrowLeft size={18} />
           Back to dashboard
         </button>
 
-
         {/* HEADER */}
 
         <div className="transactions-header">
+          <span className="transactions-eyebrow">ACCOUNT ACTIVITY</span>
 
-          <span className="transactions-eyebrow">
-            ACCOUNT ACTIVITY
-          </span>
+          <h1>Transactions</h1>
 
-          <h1>
-            Transactions
-          </h1>
-
-          <p>
-            View all transactions made from
-            your bank account.
-          </p>
-
+          <p>View all transactions made from your bank account.</p>
         </div>
-
 
         {/* ACCOUNT INFORMATION */}
 
         <div className="transactions-account">
-
           <div>
+            <span>Account</span>
 
-            <span>
-              Account
-            </span>
-
-            <strong>
-              {account.accountType}
-            </strong>
-
+            <strong>{account.accountType}</strong>
           </div>
 
-
           <div>
+            <span>Account number</span>
 
-            <span>
-              Account number
-            </span>
-
-            <strong>
-              ••••{' '}
-              {account.accountNumber.slice(
-                -4,
-              )}
-            </strong>
-
+            <strong>•••• {account.accountNumber.slice(-4)}</strong>
           </div>
 
-
           <div>
+            <span>Current balance</span>
 
-            <span>
-              Current balance
-            </span>
-
-            <strong>
-              ₹
-              {account.balance.toLocaleString(
-                'en-IN',
-              )}
-            </strong>
-
+            <strong>₹{account.balance.toLocaleString("en-IN")}</strong>
           </div>
-
         </div>
-
 
         {/* TRANSACTION HISTORY */}
 
         <div className="transactions-section">
-
-          <h2>
-            Transaction history
-          </h2>
-
+          <h2>Transaction history</h2>
 
           {/* LOADING */}
 
           {transactionsQuery.isLoading && (
-            <div className="transactions-message">
-              Loading transactions...
-            </div>
+            <div className="transactions-message">Loading transactions...</div>
           )}
-
 
           {/* ERROR */}
 
           {transactionsQuery.isError && (
-            <div
-              className="transactions-error"
-              role="alert"
-            >
-              Unable to load transactions.
-              Please try again.
+            <div className="transactions-error" role="alert">
+              Unable to load transactions. Please try again.
             </div>
           )}
-
 
           {/* EMPTY */}
 
           {!transactionsQuery.isLoading &&
             !transactionsQuery.isError &&
-            transactionsQuery.data?.length ===
-              0 && (
-              <div className="transactions-message">
-                No transactions found.
-              </div>
+            transactionsQuery.data?.length === 0 && (
+              <div className="transactions-message">No transactions found.</div>
             )}
-
 
           {/* TRANSACTIONS */}
 
           {!transactionsQuery.isLoading &&
             !transactionsQuery.isError &&
             transactionsQuery.data &&
-            transactionsQuery.data.length >
-              0 && (
-
+            transactionsQuery.data.length > 0 && (
               <div className="transaction-list">
+                {transactionsQuery.data.map((transaction) => {
+                  const isDeposit =
+                    transaction.transactionType.toUpperCase() === "DEPOSIT";
 
-                {transactionsQuery.data.map(
-                  (transaction) => {
+                  return (
+                    <div
+                      className="transaction-row"
+                      key={transaction.transactionReference}
+                    >
+                      {/* ICON */}
 
-                    const isDeposit =
-                      transaction.transactionType
-                        .toUpperCase() ===
-                      'DEPOSIT';
-
-                    return (
                       <div
-                        className="transaction-row"
-                        key={
-                          transaction.transactionReference
-                        }
+                        className={`transaction-icon ${
+                          isDeposit
+                            ? "transaction-icon--deposit"
+                            : "transaction-icon--withdraw"
+                        }`}
                       >
-
-                        {/* ICON */}
-
-                        <div
-                          className={
-                            `transaction-icon ${
-                              isDeposit
-                                ? 'transaction-icon--deposit'
-                                : 'transaction-icon--withdraw'
-                            }`
-                          }
-                        >
-                          {isDeposit ? (
-                            <ArrowDownLeft
-                              size={20}
-                            />
-                          ) : (
-                            <ArrowUpRight
-                              size={20}
-                            />
-                          )}
-                        </div>
-
-
-                        {/* DETAILS */}
-
-                        <div className="transaction-info">
-
-                          <strong>
-                            {transaction.remarks ||
-                              transaction.transactionType}
-                          </strong>
-
-                          <span>
-                            {new Date(
-                              transaction.transactionTime,
-                            ).toLocaleDateString(
-                              'en-IN',
-                              {
-                                day: '2-digit',
-                                month: 'short',
-                                year: 'numeric',
-                              },
-                            )}
-                          </span>
-
-                        </div>
-
-
-                        {/* AMOUNT */}
-
-                        <div
-                          className={
-                            `transaction-amount ${
-                              isDeposit
-                                ? 'transaction-amount--positive'
-                                : 'transaction-amount--negative'
-                            }`
-                          }
-                        >
-                          {isDeposit
-                            ? '+'
-                            : '-'}
-                          ₹
-                          {transaction.amount.toLocaleString(
-                            'en-IN',
-                          )}
-                        </div>
-
+                        {isDeposit ? (
+                          <ArrowDownLeft size={20} />
+                        ) : (
+                          <ArrowUpRight size={20} />
+                        )}
                       </div>
-                    );
-                  },
-                )}
 
+                      {/* DETAILS */}
+
+                      <div className="transaction-info">
+                        <strong>
+                          {transaction.remarks || transaction.transactionType}
+                        </strong>
+
+                        <span>
+                          {new Date(
+                            transaction.transactionTime,
+                          ).toLocaleDateString("en-IN", {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric",
+                          })}
+                        </span>
+                      </div>
+
+                      {/* AMOUNT */}
+
+                      <div
+                        className={`transaction-amount ${
+                          isDeposit
+                            ? "transaction-amount--positive"
+                            : "transaction-amount--negative"
+                        }`}
+                      >
+                        {isDeposit ? "+" : "-"}₹
+                        {transaction.amount.toLocaleString("en-IN")}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             )}
-
         </div>
-
       </section>
-
     </main>
   );
 }

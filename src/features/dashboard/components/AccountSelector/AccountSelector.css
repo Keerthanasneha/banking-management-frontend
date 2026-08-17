@@ -39,8 +39,7 @@
 .account-selector-trigger:focus {
   outline: none;
   border-color: var(--color-primary-600);
-  box-shadow:
-    0 0 0 3px rgba(23, 63, 95, 0.1);
+  box-shadow: 0 0 0 3px rgba(23, 63, 95, 0.1);
 }
 
 /* Selected account */
@@ -77,8 +76,7 @@
 
   color: var(--color-text-secondary);
 
-  transition:
-    transform 0.2s ease;
+  transition: transform 0.2s ease;
 }
 
 .account-selector-chevron--open {
@@ -101,8 +99,7 @@
 
   background: var(--color-surface);
 
-  box-shadow:
-    0 10px 30px rgba(23, 32, 42, 0.12);
+  box-shadow: 0 10px 30px rgba(23, 32, 42, 0.12);
 }
 
 /* Option */

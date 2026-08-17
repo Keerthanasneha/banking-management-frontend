@@ -1,11 +1,7 @@
-const SELECTED_ACCOUNT_PREFIX = 'selectedAccount_';
+const SELECTED_ACCOUNT_PREFIX = "selectedAccount_";
 
-export function getSelectedAccountNumber(
-  customerId: number,
-): string | null {
-  return localStorage.getItem(
-    `${SELECTED_ACCOUNT_PREFIX}${customerId}`,
-  );
+export function getSelectedAccountNumber(customerId: number): string | null {
+  return localStorage.getItem(`${SELECTED_ACCOUNT_PREFIX}${customerId}`);
 }
 
 export function saveSelectedAccountNumber(
@@ -18,10 +14,6 @@ export function saveSelectedAccountNumber(
   );
 }
 
-export function clearSelectedAccountNumber(
-  customerId: number,
-): void {
-  localStorage.removeItem(
-    `${SELECTED_ACCOUNT_PREFIX}${customerId}`,
-  );
+export function clearSelectedAccountNumber(customerId: number): void {
+  localStorage.removeItem(`${SELECTED_ACCOUNT_PREFIX}${customerId}`);
 }

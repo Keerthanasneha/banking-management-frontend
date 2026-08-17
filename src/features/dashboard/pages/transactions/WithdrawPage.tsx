@@ -1,22 +1,19 @@
-import { useState, type FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
-import {
-  ArrowLeft,
-  IndianRupee,
-} from 'lucide-react';
+import { useState, type FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft, IndianRupee } from "lucide-react";
 
-import { useWithdrawMutation } from '../../hooks/useWithdrawMutation';
-import { useAccountsQuery } from '../../hooks/useAccountsQuery';
-import { useCustomersQuery } from '../../../customers/hooks/useCustomersQuery';
+import { useWithdrawMutation } from "../../hooks/useWithdrawMutation";
+import { useAccountsQuery } from "../../hooks/useAccountsQuery";
+import { useCustomersQuery } from "../../../customers/hooks/useCustomersQuery";
 
-import { getLoggedInEmail } from '../../../../shared/utils/currentUser';
+import { getLoggedInEmail } from "../../../../shared/utils/currentUser";
 
 import {
   getSelectedAccountNumber,
   saveSelectedAccountNumber,
-} from '../../../../shared/utils/accountStorage';
+} from "../../../../shared/utils/accountStorage";
 
-import './WithdrawPage.css';
+import "./WithdrawPage.css";
 
 export function WithdrawPage() {
   const navigate = useNavigate();
@@ -27,15 +24,14 @@ export function WithdrawPage() {
 
   const accountsQuery = useAccountsQuery();
   const customersQuery = useCustomersQuery();
-  const withdrawMutation =
-    useWithdrawMutation();
+  const withdrawMutation = useWithdrawMutation();
 
   // -----------------------------------------
   // FORM STATE
   // -----------------------------------------
 
-  const [amount, setAmount] = useState('');
-  const [remarks, setRemarks] = useState('');
+  const [amount, setAmount] = useState("");
+  const [remarks, setRemarks] = useState("");
 
   // -----------------------------------------
   // LOGGED-IN USER
@@ -47,12 +43,9 @@ export function WithdrawPage() {
   // FIND LOGGED-IN CUSTOMER
   // -----------------------------------------
 
-  const customer =
-    customersQuery.data?.find(
-      (item) =>
-        item.email.toLowerCase() ===
-        loggedInEmail?.toLowerCase(),
-    );
+  const customer = customersQuery.data?.find(
+    (item) => item.email.toLowerCase() === loggedInEmail?.toLowerCase(),
+  );
 
   // -----------------------------------------
   // GET CUSTOMER'S ACCOUNTS
@@ -60,9 +53,7 @@ export function WithdrawPage() {
 
   const customerAccounts =
     accountsQuery.data?.filter(
-      (item) =>
-        item.customerId ===
-        customer?.customerId,
+      (item) => item.customerId === customer?.customerId,
     ) ?? [];
 
   // -----------------------------------------
@@ -70,9 +61,7 @@ export function WithdrawPage() {
   // -----------------------------------------
 
   const savedAccountNumber = customer
-    ? getSelectedAccountNumber(
-        customer.customerId,
-      )
+    ? getSelectedAccountNumber(customer.customerId)
     : null;
 
   // -----------------------------------------
@@ -90,54 +79,39 @@ export function WithdrawPage() {
 
   const account =
     customerAccounts.find(
-      (item) =>
-        item.accountNumber ===
-        savedAccountNumber,
-    ) ??
-    customerAccounts[0];
+      (item) => item.accountNumber === savedAccountNumber,
+    ) ?? customerAccounts[0];
 
   // -----------------------------------------
   // SUBMIT WITHDRAWAL
   // -----------------------------------------
 
-  const handleSubmit = (
-    event: FormEvent<HTMLFormElement>,
-  ) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!account) {
       return;
     }
 
-    const withdrawalAmount =
-      Number(amount);
+    const withdrawalAmount = Number(amount);
 
     // Invalid amount
-    if (
-      !Number.isFinite(withdrawalAmount) ||
-      withdrawalAmount <= 0
-    ) {
+    if (!Number.isFinite(withdrawalAmount) || withdrawalAmount <= 0) {
       return;
     }
 
     // Amount greater than balance
-    if (
-      withdrawalAmount >
-      account.balance
-    ) {
+    if (withdrawalAmount > account.balance) {
       return;
     }
 
     withdrawMutation.mutate(
       {
-        accountNumber:
-          account.accountNumber,
+        accountNumber: account.accountNumber,
 
-        amount:
-          withdrawalAmount,
+        amount: withdrawalAmount,
 
-        remarks:
-          remarks.trim(),
+        remarks: remarks.trim(),
       },
       {
         onSuccess: () => {
@@ -153,7 +127,7 @@ export function WithdrawPage() {
             );
           }
 
-          navigate('/dashboard');
+          navigate("/dashboard");
         },
       },
     );
@@ -163,18 +137,11 @@ export function WithdrawPage() {
   // LOADING
   // -----------------------------------------
 
-  if (
-    accountsQuery.isLoading ||
-    customersQuery.isLoading
-  ) {
+  if (accountsQuery.isLoading || customersQuery.isLoading) {
     return (
       <main className="withdraw-page">
         <section className="withdraw-card">
-
-          <p>
-            Loading your account...
-          </p>
-
+          <p>Loading your account...</p>
         </section>
       </main>
     );
@@ -184,54 +151,34 @@ export function WithdrawPage() {
   // API ERROR
   // -----------------------------------------
 
-  if (
-    accountsQuery.isError ||
-    customersQuery.isError
-  ) {
+  if (accountsQuery.isError || customersQuery.isError) {
     return (
       <main className="withdraw-page">
         <section className="withdraw-card">
-
           <button
             type="button"
             className="withdraw-back"
-            onClick={() =>
-              navigate('/dashboard')
-            }
+            onClick={() => navigate("/dashboard")}
           >
             <ArrowLeft size={18} />
             Back to dashboard
           </button>
 
           <div className="withdraw-header">
-
             <div className="withdraw-icon">
               <IndianRupee size={24} />
             </div>
 
-            <span className="withdraw-eyebrow">
-              ACCOUNT TRANSACTION
-            </span>
+            <span className="withdraw-eyebrow">ACCOUNT TRANSACTION</span>
 
-            <h1>
-              Withdraw money
-            </h1>
+            <h1>Withdraw money</h1>
 
-            <p>
-              Withdraw money from your bank
-              account securely.
-            </p>
-
+            <p>Withdraw money from your bank account securely.</p>
           </div>
 
-          <div
-            className="withdraw-error"
-            role="alert"
-          >
-            Unable to load your account
-            details.
+          <div className="withdraw-error" role="alert">
+            Unable to load your account details.
           </div>
-
         </section>
       </main>
     );
@@ -245,42 +192,28 @@ export function WithdrawPage() {
     return (
       <main className="withdraw-page">
         <section className="withdraw-card">
-
           <button
             type="button"
             className="withdraw-back"
-            onClick={() =>
-              navigate('/dashboard')
-            }
+            onClick={() => navigate("/dashboard")}
           >
             <ArrowLeft size={18} />
             Back to dashboard
           </button>
 
           <div className="withdraw-header">
-
             <div className="withdraw-icon">
               <IndianRupee size={24} />
             </div>
 
-            <span className="withdraw-eyebrow">
-              ACCOUNT TRANSACTION
-            </span>
+            <span className="withdraw-eyebrow">ACCOUNT TRANSACTION</span>
 
-            <h1>
-              Withdraw money
-            </h1>
-
+            <h1>Withdraw money</h1>
           </div>
 
-          <div
-            className="withdraw-error"
-            role="alert"
-          >
-            Unable to identify the logged-in
-            customer.
+          <div className="withdraw-error" role="alert">
+            Unable to identify the logged-in customer.
           </div>
-
         </section>
       </main>
     );
@@ -294,42 +227,28 @@ export function WithdrawPage() {
     return (
       <main className="withdraw-page">
         <section className="withdraw-card">
-
           <button
             type="button"
             className="withdraw-back"
-            onClick={() =>
-              navigate('/dashboard')
-            }
+            onClick={() => navigate("/dashboard")}
           >
             <ArrowLeft size={18} />
             Back to dashboard
           </button>
 
           <div className="withdraw-header">
-
             <div className="withdraw-icon">
               <IndianRupee size={24} />
             </div>
 
-            <span className="withdraw-eyebrow">
-              ACCOUNT TRANSACTION
-            </span>
+            <span className="withdraw-eyebrow">ACCOUNT TRANSACTION</span>
 
-            <h1>
-              Withdraw money
-            </h1>
-
+            <h1>Withdraw money</h1>
           </div>
 
-          <div
-            className="withdraw-error"
-            role="alert"
-          >
-            No bank account is available
-            for this customer.
+          <div className="withdraw-error" role="alert">
+            No bank account is available for this customer.
           </div>
-
         </section>
       </main>
     );
@@ -341,116 +260,64 @@ export function WithdrawPage() {
 
   return (
     <main className="withdraw-page">
-
       <section className="withdraw-card">
-
         {/* BACK */}
 
         <button
           type="button"
           className="withdraw-back"
-          onClick={() =>
-            navigate('/dashboard')
-          }
+          onClick={() => navigate("/dashboard")}
         >
           <ArrowLeft size={18} />
           Back to dashboard
         </button>
 
-
         {/* HEADER */}
 
         <div className="withdraw-header">
-
           <div className="withdraw-icon">
             <IndianRupee size={24} />
           </div>
 
-          <span className="withdraw-eyebrow">
-            ACCOUNT TRANSACTION
-          </span>
+          <span className="withdraw-eyebrow">ACCOUNT TRANSACTION</span>
 
-          <h1>
-            Withdraw money
-          </h1>
+          <h1>Withdraw money</h1>
 
-          <p>
-            Withdraw money from your bank
-            account securely.
-          </p>
-
+          <p>Withdraw money from your bank account securely.</p>
         </div>
-
 
         {/* ACCOUNT INFORMATION */}
 
         <div className="withdraw-account">
-
           <div className="withdraw-account-row">
+            <span>Account</span>
 
-            <span>
-              Account
-            </span>
-
-            <strong>
-              {account.accountType}
-            </strong>
-
+            <strong>{account.accountType}</strong>
           </div>
 
-
           <div className="withdraw-account-row">
+            <span>Account number</span>
 
-            <span>
-              Account number
-            </span>
-
-            <strong>
-              ••••{' '}
-              {account.accountNumber.slice(-4)}
-            </strong>
-
+            <strong>•••• {account.accountNumber.slice(-4)}</strong>
           </div>
 
-
           <div className="withdraw-account-row">
+            <span>Available balance</span>
 
-            <span>
-              Available balance
-            </span>
-
-            <strong>
-              ₹
-              {account.balance.toLocaleString(
-                'en-IN',
-              )}
-            </strong>
-
+            <strong>₹{account.balance.toLocaleString("en-IN")}</strong>
           </div>
-
         </div>
-
 
         {/* FORM */}
 
-        <form
-          className="withdraw-form"
-          onSubmit={handleSubmit}
-        >
-
+        <form className="withdraw-form" onSubmit={handleSubmit}>
           {/* AMOUNT */}
 
           <div className="withdraw-field">
-
-            <label htmlFor="amount">
-              Amount
-            </label>
+            <label htmlFor="amount">Amount</label>
 
             <div className="withdraw-amount-input">
-
-              <span>
-                ₹
-              </span>
+              <span>₹</span>
 
               <input
                 id="amount"
@@ -460,66 +327,41 @@ export function WithdrawPage() {
                 step="0.01"
                 placeholder="Enter amount"
                 value={amount}
-                onChange={(event) =>
-                  setAmount(
-                    event.target.value,
-                  )
-                }
+                onChange={(event) => setAmount(event.target.value)}
                 required
               />
-
             </div>
 
-
-            {amount &&
-              Number(amount) >
-                account.balance && (
-                <span className="withdraw-field-error">
-                  Amount cannot exceed
-                  your available balance.
-                </span>
-              )}
-
+            {amount && Number(amount) > account.balance && (
+              <span className="withdraw-field-error">
+                Amount cannot exceed your available balance.
+              </span>
+            )}
           </div>
-
 
           {/* REMARKS */}
 
           <div className="withdraw-field">
-
-            <label htmlFor="remarks">
-              Remarks
-            </label>
+            <label htmlFor="remarks">Remarks</label>
 
             <input
               id="remarks"
               type="text"
               placeholder="e.g. Cash withdrawal"
               value={remarks}
-              onChange={(event) =>
-                setRemarks(
-                  event.target.value,
-                )
-              }
+              onChange={(event) => setRemarks(event.target.value)}
               required
             />
-
           </div>
-
 
           {/* API ERROR */}
 
           {withdrawMutation.isError && (
-            <div
-              className="withdraw-error"
-              role="alert"
-            >
-              Unable to process the
-              withdrawal. Please check
-              your balance and try again.
+            <div className="withdraw-error" role="alert">
+              Unable to process the withdrawal. Please check your balance and
+              try again.
             </div>
           )}
-
 
           {/* SUBMIT */}
 
@@ -530,20 +372,14 @@ export function WithdrawPage() {
               withdrawMutation.isPending ||
               !amount ||
               Number(amount) <= 0 ||
-              Number(amount) >
-                account.balance ||
+              Number(amount) > account.balance ||
               !remarks.trim()
             }
           >
-            {withdrawMutation.isPending
-              ? 'Processing...'
-              : 'Withdraw money'}
+            {withdrawMutation.isPending ? "Processing..." : "Withdraw money"}
           </button>
-
         </form>
-
       </section>
-
     </main>
   );
 }
